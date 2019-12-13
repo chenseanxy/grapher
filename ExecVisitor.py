@@ -44,8 +44,6 @@ class ExecVisitor(GraphVisitor):
         end = self.visit(ctx.expr(1))
         step = self.visit(ctx.expr(2))
 
-        print(start, end, step)
-
         batch = Points()
         batch.setcolor(self.color)
 
