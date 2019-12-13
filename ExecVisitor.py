@@ -20,6 +20,11 @@ class ExecVisitor(GraphVisitor):
     def setPlotter(self, plotter: Plotter):
         self.plotter = plotter
 
+    def visitProgram(self, ctx):
+        for statement in ctx.statement():
+            result = self.visit(statement)
+            print(f" - {result}")
+
     def visitStatOrigin(self, ctx) -> str:
         self.origin_x = self.visit(ctx.expr(0))
         self.origin_y = self.visit(ctx.expr(1))
