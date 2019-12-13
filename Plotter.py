@@ -11,7 +11,9 @@ class Plotter(object):
             plt.ioff()
 
     def draw_points(self, points: Points):
-        plt.plot(points.x, points.y, color=points.color, marker='.')
+        plt.plot(points.x, points.y, color=points.color, marker='.', lw=0)
+        plt.axis('scaled')
+
     
     def show(self):
         plt.show()
