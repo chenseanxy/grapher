@@ -1,7 +1,9 @@
+color is (166, 86, 123);
 
 // Circle 1
 origin is (350, 220);
-scale is (50, 50);
+rot is 2/pi;
+scale is (50, 75);
 for t from 0 to 2*pi step pi/100 draw(cos(t), sin(t));
 
 // Circle 2
