@@ -4,27 +4,29 @@ from Points import Points
 
 class Plotter(object):
 
-    def interactive(self, interactive: bool):
+    @staticmethod
+    def interactive(interactive: bool):
         if interactive:
             plt.ion()
         else:
             plt.ioff()
 
-    def draw_points(self, points: Points):
+    @staticmethod
+    def draw_points(points: Points):
         plt.plot(points.x, points.y, color=points.color, marker='.', lw=0)
         plt.axis('scaled')
 
-    
-    def show(self):
+    @staticmethod
+    def show():
         plt.show()
     
-    def draw(self):
+    @staticmethod
+    def draw():
         plt.draw()
 
 if __name__ == "__main__":
-    plotter = Plotter()
-    plotter.interactive(True)
-    plt.show()
+    Plotter.interactive(True)
+    Plotter.show()
     
     points = Points()
     pointlist = [[1,1], [2,2], [3,3]]
@@ -32,9 +34,8 @@ if __name__ == "__main__":
         points.addpoint(point[0], point[1])
     points.setcolor("red")
 
-    plotter.draw_points(points)
+    Plotter.draw_points(points)
 
-    print("after-show")
-
-
+    input("after-show: enter to continue")
+    
     

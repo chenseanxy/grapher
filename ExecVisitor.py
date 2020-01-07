@@ -7,18 +7,16 @@ import numpy as np
 import math
 
 class ExecVisitor(GraphVisitor):
-    plotter = Plotter()
 
-    origin_x = 0
-    origin_y = 0
-    scale_x = 1
-    scale_y = 1
-    rot = 0
-    t = 0
-    color = (0,0,0)
-
-    def setPlotter(self, plotter: Plotter):
-        self.plotter = plotter
+    def __init__(self):
+        self.origin_x = 0
+        self.origin_y = 0
+        self.scale_x = 1
+        self.scale_y = 1
+        self.rot = 0
+        self.t = 0
+        self.color = (0,0,0)
+        super().__init__()
 
     def visitProgram(self, ctx):
         for statement in ctx.statement():
@@ -62,7 +60,7 @@ class ExecVisitor(GraphVisitor):
             y = rot_y + self.origin_y
             batch.addpoint(x, y)
         
-        self.plotter.draw_points(batch)
+        Plotter.draw_points(batch)
 
         return f"Drew points"
 
@@ -119,19 +117,21 @@ class ExecVisitor(GraphVisitor):
     def visitFuncExpr(self, ctx) -> float:
         pre_function = self.visit(ctx.expr())
         func = ctx.ID().getText().lower()
-        if func == 'sin':
-            return math.sin(pre_function)
-        if func == 'cos':
-            return math.cos(pre_function)
-        if func == 'tan':
-            return math.tan(pre_function)
-        if func == 'ln':
-            return math.log(pre_function)
-        if func == 'exp':
-            return math.exp(pre_function)
-        if func == 'sqrt':
-            return math.sqrt(pre_function)
-        raise AttributeError(f"Function '{ctx.ID().getText()}' invalid")
+
+        funcmap = {
+            'sin': math.sin, 
+            'cos': math.cos,
+            'tan': math.tan,
+            'ln' : math.log,
+            'exp': math.exp,
+            'sqrt': math.sqrt,
+        }
+
+        try:
+            return funcmap[func](pre_function)
+        
+        except KeyError:
+            raise AttributeError(f"Function '{ctx.ID().getText()}' invalid")
 
     def visitNestedExpr(self, ctx) -> float:
         return self.visit(ctx.expr())

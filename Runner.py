@@ -10,15 +10,12 @@ import argparse
 import os
 
 def interactive():
-    plotter = Plotter()
-    plotter.interactive(True)
-
+    Plotter.interactive(True)
+    
     parser = GraphParser(None)
     visitor = ExecVisitor()
-    visitor.setPlotter(plotter)
 
     lineno = 1
-
 
     while True:
         line = input(f"Graph [{lineno}]> ")
@@ -37,8 +34,7 @@ def interactive():
         lineno += 1
 
 def file_interpreter(filename: str):
-    plotter = Plotter()
-    plotter.interactive(False)
+    Plotter.interactive(False)
     
     istream = FileStream(filename)
     lexer = GraphLexer(istream)
@@ -49,7 +45,7 @@ def file_interpreter(filename: str):
     visitor = ExecVisitor()
     visitor.visit(tree)
 
-    plotter.show()
+    Plotter.show()
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
