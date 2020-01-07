@@ -32,7 +32,27 @@ Two modes are offered by the interpreter: file input & interactive.
 
 ## Graphing Language
 
+A sample graphing program can be found at `sample_graph.txt`.
+
 #### Statements
 
+Note that statements should end with ";". However statements without ";" are tolerated in interactive mode.
+
+Statement                                                      | Description
+:------------------------------------------------------------- | :---------------------------------------------------
+`FOR T FROM <A> TO <B> STEP <C> DRAW(<X>,<Y>)`                 | Draw points in a loop. X & Y are expressions containing the iterated vairable T.
+`SCALE IS (<X>, <Y>)`                                          | Set the scale of X & Y axis.
+`ORIGIN IS (<X>, <Y>)`                                         | Set the origin of X & Y axis.
+`ROT IS (<RAD>)`                                               | Rotate the coordinates by its origin for RAD radian.
+`COLOR IS <COLOR>` or `COLOR IS (<R>,<G>,<B>)`                 | Set the color of points to draw next. COLOR can be RED, BLACK, YELLOW, GREEN, BLUE. R ,G & B are valid between 0~255.
+`--<Comment>` or `//<Comment>` or `/* <Multi-line comment> */` | Comments!
+
 #### Expressions
+
+Expressions are where calculations are made. 
+ * Numbers can be represented as `1`, `1.1` or `1.1E3`. 
+ * Arithmetic operations `+`, `-`, `*`, `/`, `**` (power) are supported.
+ * Mathmatic functions sin, cos, tan, ln, exp, sqrt are supported.
+ * Constants `e` and `pi`.
+ * Use `()` to priortize operations.
 
