@@ -104,12 +104,15 @@ class ExecVisitor(GraphVisitor):
     
     def visitConst(self, ctx) -> float:
         cst = ctx.CONST_ID().getText().lower()
-        if cst == 'pi':
-            return math.pi
-        elif cst == 'e':
-            return math.e
-        else:
+        
+        try:
             return float(cst)
+        except ValueError:
+            constant_map = {'pi': math.pi, 'e': math.e}
+            try:
+                return constant_map[cst]
+            except KeyError:
+                raise ValueError(f"{cst} is not a valid constant")
 
     def visitVarT(self, ctx) -> float:
         return self.t
