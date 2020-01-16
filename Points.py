@@ -2,9 +2,10 @@ from typing import List
 
 class Points(object):
 
-    x = []
-    y = []
-    color = (0, 0, 0)
+    def __init__(self):
+        self.x = []
+        self.y = []
+        self.color = (0, 0, 0)
 
     def addpoint(self, x_pos: float, y_pos: float):
         self.x.append(x_pos)
